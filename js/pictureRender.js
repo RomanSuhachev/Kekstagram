@@ -1,4 +1,4 @@
-import {pictures, comments} from './data.js';
+import {pictures} from './data.js';
 
 const fragment = document.createDocumentFragment();
 const template = document.querySelector('#picture').content;
@@ -25,3 +25,4 @@ function getPictureElement(item) {
   otherPictures.append(fragment);
 }
 
+export {getPictureElement, otherPictures};
