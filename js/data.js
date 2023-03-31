@@ -8,7 +8,7 @@ const MESSAGE_TEXT = ['Всё отлично!',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
 const NAMES = ['Petya', 'Denis', 'Alex', 'Shon', 'Keks'];
-const DESCRIPTION_PHOTO = ['Nice', 'Very good', 'Beatiful photo', 'Usefull for me', 'How did you do that?']
+const DESCRIPTION_PHOTO = ['Nice', 'Very good', 'Beatiful photo', 'Usefull for me', 'How did you do that?'];
 
 const comments = Array.from({length: getRandomNumber(1,9)}, (_, index) => createComment(index + 1));
 
@@ -21,7 +21,7 @@ function createComment(index) {
   };
 }
 
-const arr = Array.from({length: 25}, (_,index) => createProfile(index + 1));
+const pictures = Array.from({length: 25}, (_,index) => createProfile(index + 1));
 
 function createProfile(index) {
   return {
@@ -33,4 +33,4 @@ function createProfile(index) {
   };
 }
 
-export {arr, comments};
+export {pictures, comments};

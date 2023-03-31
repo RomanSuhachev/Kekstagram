@@ -1,4 +1,5 @@
 import { getRandomArrayElement,getRandomNumber } from './util.js';
-import { arr,comments } from './data.js';
+import { pictures,comments } from './data.js';
+import './pictureRender.js';
 
-console.log(arr);
+console.log(pictures);

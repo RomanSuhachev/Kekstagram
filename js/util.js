@@ -13,13 +13,10 @@ function getRandomArrayElement(array) {
   return array[getRandomNumber(0, array.length - 1)];
 }
 
-
 function getStringLength(string, maxLength) {
-  if(string.length > maxLength) {
-    return false;
-  }
 
-  return true;
+  return string.length > maxLength ? false : true;
+
 }
 
 export {getRandomArrayElement, getRandomNumber};
