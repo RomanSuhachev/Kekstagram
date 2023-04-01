@@ -14,11 +14,13 @@ function showBigImage(evt) {
   }
 
   bigPictureContainer.classList.remove('hidden');
+
+  document.body.style.overflow = 'hidden';
   const [bigPicture , src, info] = [bigPictureContainer.querySelector('img'), evt.target.src, evt.target.closest('a').querySelector('.picture__info')];
   const [comments, likes] = Array.from(info.children);
   bigPicture.src = src;
   bigPictureLikesCount.querySelector('.likes-count').textContent = likes.textContent;
   commentsCount.textContent = comments.textContent;
-
-  console.log(likes)
 }
+
+export {bigPictureContainer}
