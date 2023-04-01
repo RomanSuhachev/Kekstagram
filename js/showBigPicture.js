@@ -7,7 +7,6 @@ const commentsCount = document.querySelector('.social__comment-count .comments-c
 otherPictures.addEventListener('click', showBigImage);
 
 function showBigImage(evt) {
-  evt.preventDefault();
 
   if(!evt.target.closest('.picture__img')) {
     return;
@@ -15,7 +14,7 @@ function showBigImage(evt) {
 
   bigPictureContainer.classList.remove('hidden');
 
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('modal-open');
   const [bigPicture , src, info] = [bigPictureContainer.querySelector('img'), evt.target.src, evt.target.closest('a').querySelector('.picture__info')];
   const [comments, likes] = Array.from(info.children);
   bigPicture.src = src;
