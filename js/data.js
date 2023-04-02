@@ -10,18 +10,15 @@ const MESSAGE_TEXT = ['Всё отлично!',
 const NAMES = ['Petya', 'Denis', 'Alex', 'Shon', 'Keks'];
 const DESCRIPTION_PHOTO = ['Nice', 'Very good', 'Beatiful photo', 'Usefull for me', 'How did you do that?'];
 
-const comments = Array.from({length: getRandomNumber(1,9)}, (_, index) => createComment(index + 1));
-
 function createComment(index) {
   return {
     id: index,
     avatar: `img/avatar-${getRandomNumber(1,6)}.svg`,
     message: `${getRandomArrayElement(MESSAGE_TEXT)}`,
-    name: `${getRandomArrayElement(NAMES)}`
+    name: getRandomArrayElement(NAMES),
   };
 }
 
-const pictures = Array.from({length: 25}, (_,index) => createProfile(index + 1));
 
 function createProfile(index) {
   return {
@@ -29,8 +26,16 @@ function createProfile(index) {
     url: `photos/${index}.jpg`,
     description: `${getRandomArrayElement(DESCRIPTION_PHOTO)}`,
     likes: getRandomNumber(15,200),
-    comments: comments
+    comments: Array.from({length: getRandomNumber(1,9)}, (_, commentIndex) => createComment(commentIndex + 1)),
   };
 }
 
-export {pictures, comments};
+function getPictures() {
+
+  return Array.from({length: 25}, (_,index) =>
+    createProfile(index + 1)
+  );
+}
+
+
+export {getPictures};

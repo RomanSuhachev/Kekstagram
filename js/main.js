@@ -1,5 +1,5 @@
-import { getRandomArrayElement,getRandomNumber } from './util.js';
-import { pictures,comments } from './data.js';
-import './pictureRender.js';
-import './showBigPicture.js';
-import './closeModal.js';
+import { getPictures } from './data.js';
+import { renderPictures } from './pictureRender.js';
+import { showBigImage } from './showBigPicture.js';
+
+renderPictures(getPictures());

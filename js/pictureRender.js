@@ -1,14 +1,10 @@
-import {pictures} from './data.js';
+import { showBigImage } from "./showBigPicture.js";
 
-const fragment = document.createDocumentFragment();
 const template = document.querySelector('#picture').content;
 const pictureLink = template.querySelector('.picture');
-const otherPictures = document.querySelector('.pictures');
+const pictureContainer = document.querySelector('.pictures');
 
-
-pictures.forEach((item) => getPictureElement(item));
-
-function getPictureElement(item) {
+function createPictureElement(item) {
 
   const newPicture = pictureLink.cloneNode(true);
 
@@ -21,8 +17,20 @@ function getPictureElement(item) {
   likes.textContent = item.likes;
   comment.textContent = item.comments.length;
 
-  fragment.append(newPicture);
-  otherPictures.append(fragment);
+  newPicture.addEventListener('click', () => {
+    showBigImage(item);
+  });
+
+  return newPicture;
 }
 
-export {getPictureElement, otherPictures};
+function renderPictures(pictures) {
+  const fragment = document.createDocumentFragment();
+  pictures.forEach((picture) => {
+    const pictureElement = createPictureElement(picture);
+    fragment.append(pictureElement);
+  });
+  pictureContainer.append(fragment);
+}
+
+export { renderPictures, pictureContainer };
