@@ -52,8 +52,6 @@ function renderPictureInfo({url, likes, description}) {
 function showBigImage(picture) {
   bigPictureContainer.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  commentsCount.classList.add('hidden');
-  commentLoader.classList.add('hidden');
   document.addEventListener('keydown', onEscKeyDown);
 
   renderPictureInfo(picture);
