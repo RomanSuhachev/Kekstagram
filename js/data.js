@@ -26,7 +26,7 @@ function createProfile(index) {
     url: `photos/${index}.jpg`,
     description: `${getRandomArrayElement(DESCRIPTION_PHOTO)}`,
     likes: getRandomNumber(15,200),
-    comments: Array.from({length: getRandomNumber(1,9)}, (_, commentIndex) => createComment(commentIndex + 1)),
+    comments: Array.from({length: getRandomNumber(1,30)}, (_, commentIndex) => createComment(commentIndex + 1)),
   };
 }
 

@@ -10,7 +10,7 @@ const uploadContainer = uploadImageForm.querySelector('.img-upload__wrapper');
 const re = /[^A-Za-z0-9А-Яа-яЁё]/g;
 const MAX_COMMENT_LENGTH = 20;
 const MIN_COMMENT_LENGTH = 2;
-const COMMENTS_COUNT = 5;
+const HASHTAGS_COUNT = 5;
 
 
 uploadImageBtn.addEventListener('change', showUploadImageWindow);
@@ -82,7 +82,7 @@ function isValidTag(tag) {
 }
 
 function hasValidCount(tags) {
-  return tags.length <= COMMENTS_COUNT;
+  return tags.length <= HASHTAGS_COUNT;
 }
 
 function hasUniqueTag(tags) {
