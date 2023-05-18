@@ -19,4 +19,8 @@ function getStringLength(string, maxLength) {
 
 }
 
-export {getRandomArrayElement, getRandomNumber};
+function isEsc(e) {
+  return e.key === 'Escape';
+}
+
+export {getRandomArrayElement, getRandomNumber, isEsc};
