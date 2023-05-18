@@ -1,3 +1,4 @@
+import { isEsc } from "./util.js";
 
 const uploadImageForm = document.querySelector('.img-upload__form');
 const uploadOverlay = uploadImageForm.querySelector('.img-upload__overlay');
@@ -7,6 +8,7 @@ const textArea = document.querySelector('.text__description');
 const hashTags = document.querySelector('.text__hashtags');
 const body = document.body;
 const uploadContainer = uploadImageForm.querySelector('.img-upload__wrapper');
+const scaleInput = document.querySelector('.scale__control--value');
 
 
 uploadImageBtn.addEventListener('change', showUploadImageWindow);
@@ -33,7 +35,7 @@ function hideUploadImageWindow() {
 }
 
 function isEscDown(evt) {
-  if(evt.key === 'Escape') {
+  if(isEsc(evt)) {
     evt.preventDefault();
     hideUploadImageWindow();
   }
