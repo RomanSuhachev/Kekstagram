@@ -1,6 +1,5 @@
 const scaleContainer = document.querySelector('.scale');
 const imgPreview = document.querySelector('.img-upload__preview img');
-const bigger = document.querySelector('.scale__control--bigger');
 const scaleInput = document.querySelector('.scale__control--value');
 
 const SCALE_STEP = 0.25;
@@ -11,6 +10,11 @@ let currentScale = 1;
 function changeInputValue() {
   scaleInput.value = `${currentScale * 100}%`;
 }
+
+const setDefaultScale = () => {
+  currentScale = DEFAULT_SCALE;
+  imgPreview.style.transform = `scale(${currentScale})`;
+};
 
 class Scale {
   constructor(elem) {
@@ -41,3 +45,5 @@ class Scale {
 }
 
 new Scale(scaleContainer);
+
+export {setDefaultScale};
