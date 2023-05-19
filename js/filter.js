@@ -59,9 +59,6 @@ new Scale(scaleContainer);
 // apply effects
 
 function setEffect (effect) {
-  effectsItems.forEach(item => {
-    item.className = "";
-  });
   imgPreview.className= `effects__preview--${effect}`;
 };
 
