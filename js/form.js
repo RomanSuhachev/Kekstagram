@@ -1,5 +1,5 @@
 import { isEsc } from "./util.js";
-import { setDefaultScale } from "./filter.js";
+import { resetEffects } from "./filter.js";
 
 const uploadImageForm = document.querySelector('.img-upload__form');
 const uploadOverlay = uploadImageForm.querySelector('.img-upload__overlay');
@@ -34,7 +34,7 @@ function hideUploadImageWindow() {
   uploadOverlay.classList.add('hidden');
   document.removeEventListener('keydown',isEscDown);
   uploadImageForm.reset();
-  setDefaultScale();
+  resetEffects();
   isShowModal();
 }
 

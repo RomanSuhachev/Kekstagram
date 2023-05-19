@@ -1,6 +1,8 @@
 const scaleContainer = document.querySelector('.scale');
 const imgPreview = document.querySelector('.img-upload__preview img');
 const scaleInput = document.querySelector('.scale__control--value');
+const filters = document.querySelector('.effects');
+const effectsItems = filters.querySelectorAll('.effects__list .effects__item');
 
 const SCALE_STEP = 0.25;
 const DEFAULT_SCALE = 1;
@@ -11,10 +13,17 @@ function changeInputValue() {
   scaleInput.value = `${currentScale * 100}%`;
 }
 
-const setDefaultScale = () => {
+const setDefaultScale = (item) => {
+  /*
   currentScale = DEFAULT_SCALE;
-  imgPreview.style.transform = `scale(${currentScale})`;
+  imgPreview.style.transform = `scale(${currentScale})`;*/
+
+  item.removeAttribute("style");
 };
+
+function removeFilters(item) {
+  item.removeAttribute("class");
+}
 
 class Scale {
   constructor(elem) {
@@ -46,4 +55,61 @@ class Scale {
 
 new Scale(scaleContainer);
 
-export {setDefaultScale};
+
+// apply effects
+
+function setEffect (effect) {
+  effectsItems.forEach(item => {
+    item.className = "";
+  });
+  imgPreview.className= `effects__preview--${effect}`;
+};
+
+class Filters {
+  constructor(elem) {
+    this.elem = elem;
+    elem.onchange = this.onChange.bind(this);
+  }
+
+  original() {
+    setEffect("");
+  }
+
+  chrome() {
+    setEffect("chrome");
+  }
+
+  sepia() {
+    setEffect("sepia");
+  }
+
+  marvin() {
+    setEffect("marvin");
+  }
+
+  phobos() {
+    setEffect("phobos");
+  }
+
+  heat() {
+    setEffect("heat");
+  }
+
+  onChange(e) {
+    let filter = e.target.dataset.filter;
+    if(filter) {
+      this[filter]();
+    }
+  }
+}
+
+new Filters(filters);
+
+//reset effects
+
+function resetEffects() {
+  setDefaultScale(imgPreview);
+  removeFilters(imgPreview);
+}
+
+export {resetEffects};
