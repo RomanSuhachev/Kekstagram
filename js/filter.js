@@ -1,8 +1,10 @@
+const effectValue = document.querySelector('.effect-level__value');
 const scaleContainer = document.querySelector('.scale');
 const imgPreview = document.querySelector('.img-upload__preview img');
 const scaleInput = document.querySelector('.scale__control--value');
 const filters = document.querySelector('.effects');
 const effectsItems = filters.querySelectorAll('.effects__list .effects__item');
+const effectDegree = document.querySelector('.effect-level__slider');
 
 const SCALE_STEP = 0.25;
 const DEFAULT_SCALE = 1;
@@ -62,43 +64,99 @@ function setEffect (effect) {
   imgPreview.className= `effects__preview--${effect}`;
 };
 
+noUiSlider.create(effectDegree, {
+  start: 1,
+  step: 0.1,
+  range: {
+    'min': 0,
+    'max': 1
+  }
+});
+
 class Filters {
   constructor(elem) {
     this.elem = elem;
     elem.onchange = this.onChange.bind(this);
   }
 
-  original() {
+  original(value) {
     setEffect("");
+    return 'none';
   }
 
-  chrome() {
+  chrome(value) {
     setEffect("chrome");
+    return `grayscale(${value})`;
   }
 
-  sepia() {
+  sepia(value) {
     setEffect("sepia");
+    return `sepia(${value})`;
   }
 
-  marvin() {
+  marvin(value) {
     setEffect("marvin");
+    return `invert(${value}%)`;
   }
 
-  phobos() {
+  phobos(value) {
     setEffect("phobos");
+    return `blur(${value}px)`;
   }
 
-  heat() {
+  heat(value) {
     setEffect("heat");
+    return `brightness(${value})`;
   }
 
   onChange(e) {
     let filter = e.target.dataset.filter;
     if(filter) {
-      this[filter]();
+      this.setFilterDegree(filter);
+      imgPreview.style.filter = this[filter]();
+    }
+
+    switch(filter) {
+      case ('marvin'):
+        effectDegree.noUiSlider.updateOptions({
+          range: {
+            'min': 0,
+            'max': 100
+          },
+          start: 100,
+          step: 1
+        });
+        break;
+      case ('phobos'):
+        effectDegree.noUiSlider.updateOptions({
+          range: {
+            'min': 0,
+            'max': 3
+          },
+          start: 3,
+          step: 0.1
+        });
+        break;
+      case ('heat'):
+        effectDegree.noUiSlider.updateOptions({
+          range: {
+            'min': 1,
+            'max': 3
+          },
+          start: 3,
+          step: 0.1
+        });
+        break;
     }
   }
-}
+
+  setFilterDegree(filter) {
+    effectDegree.noUiSlider.on('update', () => {
+      effectValue.value = effectDegree.noUiSlider.get();
+      imgPreview.style.filter = this[filter](effectValue.value);
+    });
+  }
+};
 
 new Filters(filters);
 
