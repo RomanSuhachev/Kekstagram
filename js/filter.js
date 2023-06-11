@@ -158,7 +158,7 @@ class Filters {
   }
 };
 
-new Filters(filters);
+let filtersClass = new Filters(filters);
 
 //reset effects
 
@@ -167,4 +167,4 @@ function resetEffects() {
   removeFilters(imgPreview);
 }
 
-export {resetEffects};
+export {resetEffects,filtersClass};
