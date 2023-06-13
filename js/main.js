@@ -3,5 +3,4 @@ import { renderPictures } from './pictureRender.js';
 import { showBigImage } from './showBigPicture.js';
 import './form.js';
 import './filter.js';
-
-renderPictures(getPictures());
+import './api.js';
