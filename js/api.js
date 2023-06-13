@@ -1,7 +1,7 @@
 import { renderPictures } from './pictureRender.js';
 
 function showErrorMessage() {
-  const body = document.querySelector('body');
+  const body = document.querySeelctor('body');
   const message = document.querySelector('#messages').content.querySelector('.img-upload__message');
   const copyMessage = message.cloneNode(true);
   copyMessage.textContent = 'Не удалось загрузить данные c сервера :(';
