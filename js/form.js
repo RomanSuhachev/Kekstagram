@@ -1,6 +1,8 @@
 import { isEsc } from "./util.js";
 import { resetEffects,filtersClass } from "./filter.js";
+import { sendForm } from "./api.js";
 
+const submitBtn = document.querySelector('.img-upload__submit');
 const uploadImageForm = document.querySelector('.img-upload__form');
 const uploadOverlay = uploadImageForm.querySelector('.img-upload__overlay');
 const uploadImageBtn = uploadImageForm.querySelector('.img-upload__input');
@@ -34,9 +36,16 @@ function hideUploadImageWindow() {
   uploadOverlay.classList.add('hidden');
   document.removeEventListener('keydown',isEscDown);
   uploadImageForm.reset();
+  resetSubmitBtn();
   resetEffects();
   filtersClass.setFilterDegree('original');
   isShowModal();
+}
+
+function resetSubmitBtn() {
+  submitBtn.textContent = 'Опубликовать';
+  submitBtn.removeAttribute('style');
+  submitBtn.disabled = false;
 }
 
 function isEscDown(evt) {
@@ -99,21 +108,23 @@ function validateTags(value) {
   return hasUniqueTag(tags) && hasValidCount(tags) && tags.every(isValidTag);
 }
 
-uploadImageForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const isValid = pristine.validate();
+function onError() {
+  submitBtn.textContent = 'Не удалось отправить данные :(';
+  submitBtn.style.backgroundColor = 'red';
+  submitBtn.style.color = 'white';
+}
+function onSuccess() {
+  submitBtn.textContent = 'Данные отправлены';
+  submitBtn.style.backgroundColor = 'green';
+  submitBtn.style.color = 'white';
+}
 
+uploadImageForm.addEventListener('submit', (e) => {
+  const isValid = pristine.validate();
+  e.preventDefault();
   if(isValid) {
-    uploadImageForm.submit(deleteFormRedirect());
-  }else {
-    e.preventDefault();
+    sendForm(onSuccess,onError,e);
   }
-  console.log(isValid);
 });
 
-
-function deleteFormRedirect() {
-  const data = new FormData(uploadImageForm);
-  fetch(uploadImageForm.action, {method:uploadImageForm.method, body: data}).then(response => console.log(response));
-  uploadImageForm.reset();
-}
+export {hideUploadImageWindow}

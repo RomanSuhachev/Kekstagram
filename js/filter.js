@@ -147,6 +147,16 @@ class Filters {
           step: 0.1
         });
         break;
+      default:
+        effectDegree.noUiSlider.updateOptions({
+          range: {
+            'min': 0,
+            'max': 1
+          },
+          start: 1,
+          step: 0.1
+        });
+        break;
     }
   }
 
