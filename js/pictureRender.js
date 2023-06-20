@@ -33,4 +33,6 @@ function renderPictures(pictures) {
   pictureContainer.append(fragment);
 }
 
+
+
 export { renderPictures, pictureContainer };

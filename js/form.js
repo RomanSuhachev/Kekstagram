@@ -3,6 +3,7 @@ import { resetEffects,filtersClass } from "./filter.js";
 import { sendForm } from "./api.js";
 
 const submitBtn = document.querySelector('.img-upload__submit');
+const imgPreview = document.querySelector('.img-upload__preview img');
 const uploadImageForm = document.querySelector('.img-upload__form');
 const uploadOverlay = uploadImageForm.querySelector('.img-upload__overlay');
 const uploadImageBtn = uploadImageForm.querySelector('.img-upload__input');
@@ -15,11 +16,26 @@ const re = /[^A-Za-z0-9А-Яа-яЁё]/g;
 const MAX_COMMENT_LENGTH = 20;
 const MIN_COMMENT_LENGTH = 2;
 const HASHTAGS_COUNT = 5;
+const FILES_FORMAT = ['jpg', 'jpeg', 'png'];
 
 uploadImageBtn.addEventListener('change', showUploadImageWindow);
 
+function showUploadPhoto() {
+  const file = uploadImageBtn.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILES_FORMAT.some((file) => {
+    return fileName.endsWith(file);
+  });
+
+  if(matches) {
+    imgPreview.src = URL.createObjectURL(file)
+  }
+}
+
 function showUploadImageWindow() {
   uploadOverlay.classList.remove('hidden');
+  showUploadPhoto();
   closeUploadImageWindowbtn.addEventListener('click', hideUploadImageWindow);
   uploadContainer.addEventListener('click', (e) => {
     if(e.target == textArea || e.target == hashTags) {
